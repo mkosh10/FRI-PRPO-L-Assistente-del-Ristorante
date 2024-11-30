@@ -5,7 +5,7 @@
 
 
         <class>si.uni.lj.prpo.projekt04.Reservation</class>
-        <class>si.uni.lj.prpo.projekt04.Meal</class>
+        <class>si.uni.lj.prpo.projekt04.MenuItem</class>
         <class>si.uni.lj.prpo.projekt04.Employee</class>
 
         <properties>

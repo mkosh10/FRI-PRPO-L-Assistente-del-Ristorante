@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @NamedQueries(value = {
         @NamedQuery(name = "Employee.getAll", query = "SELECT e FROM Employee e "),
         @NamedQuery(name = "Employee.getEmployee", query = "SELECT e FROM Employee e WHERE e.id = :id "),
-        @NamedQuery(name = "Employee.deleteEmployee", query = "DELETE FROM Employee e WHERE e.id = :id")
 })
 
 public class Employee {

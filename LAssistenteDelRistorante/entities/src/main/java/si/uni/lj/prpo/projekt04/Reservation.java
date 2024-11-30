@@ -9,7 +9,6 @@ import java.util.Date;
 @NamedQueries(value =
         {
                 @NamedQuery(name = "Reservation.getAll", query = "SELECT r FROM Reservation r"),
-                @NamedQuery(name = "Reservation.remove", query = "DELETE FROM Reservation r WHERE r.id = :id"),
                 @NamedQuery(name = "Reservation.getReservation", query = "SELECT r FROM Reservation r WHERE r.id = :id")
         })
 public class Reservation {
@@ -26,7 +25,6 @@ public class Reservation {
     private String tableAssigned;
     private Date arrivalTime;
 
-//    @Column(nullable = true)
     private String discountCode;
     private Date createdAt;
 

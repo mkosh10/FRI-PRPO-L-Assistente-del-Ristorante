@@ -3,14 +3,15 @@ package si.uni.lj.prpo.projekt04;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name= "Mead.getAll", query = "SELECT m FROM Meal  m"),
-        @NamedQuery(name = "Meal.getMeal", query = "SELECT m FROM Meal m WHERE m.id = :id"),
-        @NamedQuery(name = "Meal.removeMeal", query = "DELETE FROM Meal m WHERE m.id = :id")
+        @NamedQuery(name= "Meal.getAll", query = "SELECT m FROM MenuItem m"),
+        @NamedQuery(name = "Meal.getMeal", query = "SELECT m FROM MenuItem m WHERE m.id = :id"),
 })
-public class Meal {
+public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,6 +31,9 @@ public class Meal {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @ElementCollection
+    private List<String> ingredients = new ArrayList<>();
     private int calories;
 
 
@@ -101,5 +105,13 @@ public class Meal {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 }

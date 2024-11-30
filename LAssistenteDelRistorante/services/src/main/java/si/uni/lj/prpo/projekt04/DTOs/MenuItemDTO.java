@@ -2,7 +2,6 @@ package si.uni.lj.prpo.projekt04.DTOs;
 
 public class MenuItemDTO {
 
-    private String itemId;
     private String name;
     private String description;
     private double price;
@@ -12,6 +11,7 @@ public class MenuItemDTO {
     private boolean isVegan;
     private boolean isGlutenFree;
     private String imageUrl;
+    private String ingredients;
     private int calories;
 
 
