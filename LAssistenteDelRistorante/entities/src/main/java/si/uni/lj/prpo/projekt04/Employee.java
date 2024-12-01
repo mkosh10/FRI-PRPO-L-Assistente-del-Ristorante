@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @NamedQueries(value = {
         @NamedQuery(name = "Employee.getAll", query = "SELECT e FROM Employee e "),
         @NamedQuery(name = "Employee.getEmployee", query = "SELECT e FROM Employee e WHERE e.id = :id "),
+
 })
 
 public class Employee {
@@ -92,5 +93,9 @@ public class Employee {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime date) {
+        this.updatedAt = date;
     }
 }

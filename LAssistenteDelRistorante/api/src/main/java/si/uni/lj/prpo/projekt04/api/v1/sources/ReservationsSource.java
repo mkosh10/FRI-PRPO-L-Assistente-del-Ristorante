@@ -2,7 +2,6 @@ package si.uni.lj.prpo.projekt04.api.v1.sources;
 
 
 import si.uni.lj.prpo.projekt04.DTOs.ReservationDTO;
-import si.uni.lj.prpo.projekt04.Reservation;
 import si.uni.lj.prpo.projekt04.beans.ReservationBean;
 import si.uni.lj.prpo.projekt04.management.ReservationBeanManagement;
 
@@ -34,7 +33,7 @@ public class ReservationsSource {
     @Path("{id}")
     public Response getReservation(@PathParam("id") Integer id){
 
-            Reservation reservation = reservationBean.getReservationWithId(id);
+            var reservation = reservationBean.getReservationWithId(id);
             if(reservation != null){
 
                 return Response.ok(reservation)

@@ -6,6 +6,7 @@ import si.uni.lj.prpo.projekt04.beans.ReservationBean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -27,9 +28,9 @@ public class ReservationBeanManagement {
         Date reservationDate = reservationDto.getReservationDate();
         String specialRequests = reservationDto.getSpecialRequests();
         String tableAssigned = reservationDto.getTableAssigned();
-        Date arrivalTime = reservationDto.getArrivalTime();
+        LocalDateTime arrivalTime = reservationDto.getArrivalTime();
         String discountCode = reservationDto.getDiscountCode();
-        Date createdAt = reservationDto.getCreatedAt();
+        LocalDateTime createdAt = reservationDto.getCreatedAt();
 
         if(customerName == null || customerContactInfo == null || numberOfGuests == null ||
                 reservationDate == null || tableAssigned == null || arrivalTime ==null || createdAt == null){
@@ -92,6 +93,8 @@ public class ReservationBeanManagement {
             if (reservationDTO.getDiscountCode() != null) {
                 currentReservation.setDiscountCode(reservationDTO.getDiscountCode());
             }
+
+            currentReservation.setUpdatedAt(LocalDateTime.now());
 
             return reservationBean.updateReservation(currentReservation);
         }

@@ -1,4 +1,5 @@
 package si.uni.lj.prpo.projekt04.DTOs;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ReservationDTO {
@@ -8,9 +9,9 @@ public class ReservationDTO {
     private Date reservationDate;
     private String specialRequests;
     private String tableAssigned;
-    private Date arrivalTime;
+    private LocalDateTime arrivalTime;
     private String discountCode;
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public String getCustomerName() {
         return customerName;
@@ -61,11 +62,11 @@ public class ReservationDTO {
         this.tableAssigned = tableAssigned;
     }
 
-    public Date getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -77,11 +78,11 @@ public class ReservationDTO {
         this.discountCode = discountCode;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

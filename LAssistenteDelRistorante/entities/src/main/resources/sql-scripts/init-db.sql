@@ -4,16 +4,16 @@ INSERT INTO Employee (firstName, lastName, email, position, hireDate, salary, up
 
 INSERT INTO Employee (firstName, lastName, email, position, hireDate, salary, updatedAt) VALUES ('Sophia', 'Williams', 'sophia.williams@restaurant.com', 'Restaurant Manager', '2019-10-05', 75000.00, NOW());
 
-
-INSERT INTO Meal (name, description, price, category, available, createdAt, updatedAt, calories) VALUES ('Margherita Pizza', 'Classic Italian pizza with tomatoes, mozzarella, and basil', 8.99, 'Main Course', true, NOW(), NOW(), 800);
-
-INSERT INTO Meal (name, description, price, category, available, createdAt, updatedAt, calories) VALUES ('Caesar Salad', 'Crispy romaine lettuce, Caesar dressing, croutons, and parmesan cheese', 6.50, 'Appetizer', true, NOW(), NOW(), 350);
-
-INSERT INTO Meal (name, description, price, category, available, createdAt, updatedAt, calories) VALUES ('Grilled Salmon', 'Fresh salmon fillet served with steamed vegetables and lemon butter sauce', 14.99, 'Main Course', true, NOW(), NOW(), 600);
-
-INSERT INTO Meal (name, description, price, category, available, createdAt, updatedAt, calories) VALUES ('Chocolate Lava Cake', 'Warm chocolate cake with a gooey center served with vanilla ice cream', 5.50, 'Dessert', true, NOW(), NOW(), 450);
-
-INSERT INTO Meal (name, description, price, category, available, createdAt, updatedAt, calories) VALUES ('Garlic Bread', 'Toasted bread with garlic butter and herbs', 3.99, 'Side Dish', true, NOW(), NOW(), 200);
+--
+-- INSERT INTO MenuItem (name, description, price, category, available, createdAt, updatedAt) VALUES ('Margherita Pizza', 'Classic Italian pizza with tomatoes, mozzarella, and basil', 8.99, 'Main Course', true, NOW(), NOW());
+--
+-- INSERT INTO MenuItem (name, description, price, category, available, createdAt, updatedAt) VALUES ('Caesar Salad', 'Crispy romaine lettuce, Caesar dressing, croutons, and parmesan cheese', 6.50, 'Appetizer', true, NOW(), NOW());
+--
+-- INSERT INTO MenuItem (name, description, price, category, available, createdAt, updatedAt) VALUES ('Grilled Salmon', 'Fresh salmon fillet served with steamed vegetables and lemon butter sauce', 14.99, 'Main Course', true, NOW(), NOW());
+--
+-- INSERT INTO MenuItem (name, description, price, category, available, createdAt, updatedAt) VALUES ('Chocolate Lava Cake', 'Warm chocolate cake with a gooey center served with vanilla ice cream', 5.50, 'Dessert', true, NOW(), NOW());
+--
+-- INSERT INTO MenuItem (name, description, price, category, available, createdAt, updatedAt) VALUES ('Garlic Bread', 'Toasted bread with garlic butter and herbs', 3.99, 'Side Dish', true, NOW(), NOW());
 
 
 
