@@ -24,6 +24,10 @@ public class ReservationBean {
         return  query.getResultList();
     }
 
+    public int getReservationListSize(){
+        return getAllReservations().size();
+    }
+
     public Reservation getReservationWithId(Integer id){
         try {
             TypedQuery<Reservation> query = em.createNamedQuery("Reservation.getReservation", Reservation.class);

@@ -1,5 +1,6 @@
 package si.uni.lj.prpo.projekt04.DTOs;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.time.LocalDate;
@@ -14,22 +15,12 @@ public class EmployeeDTO {
 
     private String position;
 
+    @JsonbDateFormat("yyyy-MM-dd")
     private LocalDate hireDate;
 
     private Double salary;
 
-    private LocalDateTime updatedAt;
 
-
-    @PrePersist
-    protected void onCreate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
 
 
     public String getFirstName() {
@@ -81,7 +72,4 @@ public class EmployeeDTO {
         this.salary = salary;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
 }

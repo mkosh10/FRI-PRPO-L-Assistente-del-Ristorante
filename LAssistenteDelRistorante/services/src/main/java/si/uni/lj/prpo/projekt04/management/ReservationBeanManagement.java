@@ -30,10 +30,9 @@ public class ReservationBeanManagement {
         String tableAssigned = reservationDto.getTableAssigned();
         LocalDateTime arrivalTime = reservationDto.getArrivalTime();
         String discountCode = reservationDto.getDiscountCode();
-        LocalDateTime createdAt = reservationDto.getCreatedAt();
 
         if(customerName == null || customerContactInfo == null || numberOfGuests == null ||
-                reservationDate == null || tableAssigned == null || arrivalTime ==null || createdAt == null){
+                reservationDate == null || tableAssigned == null || arrivalTime ==null){
             LOG.info("Not every parameter is present in ReservationDto");
             return Optional.empty();
         }
@@ -45,7 +44,6 @@ public class ReservationBeanManagement {
         resEntity.setReservationDate(reservationDate);
         resEntity.setArrivalTime(arrivalTime);
         resEntity.setTableAssigned(tableAssigned);
-        resEntity.setCreatedAt(createdAt);
         if(specialRequests != null){
             resEntity.setSpecialRequests(specialRequests);
         }

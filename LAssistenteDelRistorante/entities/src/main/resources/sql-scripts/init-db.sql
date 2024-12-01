@@ -17,8 +17,8 @@ INSERT INTO Employee (firstName, lastName, email, position, hireDate, salary, up
 
 
 
-INSERT INTO Reservation (customerName, customerContactInfo, numberOfGuests, reservationDate, specialRequests, tableAssigned, arrivalTime, discountCode, createdAt) VALUES ('John Doe', 'john.doe@example.com', 4, '2024-11-30', 'Vegetarian options required', 'Table 5', '2024-11-30 19:00:00', 'DISCOUNT10', NOW());
+INSERT INTO Reservation (customerName, customerContactInfo, numberOfGuests, reservationDate, specialRequests, tableAssigned, arrivalTime, discountCode, createdAt) VALUES ('John Doe', 'john.doe@example.com', 4, '2024-11-30 17:00:00', 'Vegetarian options required', 'Table 5', '2024-11-30 19:00:00', 'DISCOUNT10', NOW());
 
-INSERT INTO Reservation (customerName, customerContactInfo, numberOfGuests, reservationDate, specialRequests, tableAssigned, arrivalTime, discountCode, createdAt) VALUES ('Emma Watson', 'emma.watson@example.com', 2, '2024-12-01', 'Quiet corner table', 'Table 12', '2024-12-01 18:30:00', 'HOLIDAY20', NOW());
+INSERT INTO Reservation (customerName, customerContactInfo, numberOfGuests, reservationDate, specialRequests, tableAssigned, arrivalTime, discountCode, createdAt) VALUES ('Emma Watson', 'emma.watson@example.com', 2, '2024-12-01 17:00:00', 'Quiet corner table', 'Table 12', '2024-12-01 18:30:00', 'HOLIDAY20', NOW());
 
-INSERT INTO Reservation (customerName, customerContactInfo, numberOfGuests, reservationDate, specialRequests, tableAssigned, arrivalTime, discountCode, createdAt) VALUES ('Michael Scott', 'michael.scott@dundermifflin.com', 6, '2024-12-03', 'Birthday cake needed', 'Table 8', '2024-12-03 20:00:00', NULL, NOW());
+INSERT INTO Reservation (customerName, customerContactInfo, numberOfGuests, reservationDate, specialRequests, tableAssigned, arrivalTime, discountCode, createdAt) VALUES ('Michael Scott', 'michael.scott@dundermifflin.com', 6, '2024-12-03 17:00:00', 'Birthday cake needed', 'Table 8', '2024-12-03 20:00:00', NULL, NOW());

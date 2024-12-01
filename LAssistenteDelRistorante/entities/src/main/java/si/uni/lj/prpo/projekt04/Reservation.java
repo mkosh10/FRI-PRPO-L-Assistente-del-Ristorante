@@ -1,6 +1,7 @@
 package si.uni.lj.prpo.projekt04;
 
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -24,10 +25,13 @@ public class Reservation {
     private Date reservationDate;
     private String specialRequests;
     private String tableAssigned;
-    private LocalDateTime arrivalTime;
 
+    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
+    private LocalDateTime arrivalTime;
     private String discountCode;
+
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
 

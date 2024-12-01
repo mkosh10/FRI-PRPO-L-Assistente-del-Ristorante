@@ -1,5 +1,6 @@
 package si.uni.lj.prpo.projekt04;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,9 +25,11 @@ public class Employee {
 
     private String position;
 
+    @JsonbDateFormat("yyyy-MM-dd")
     private LocalDate hireDate;
 
     private Double salary;
+
 
     private LocalDateTime updatedAt;
 

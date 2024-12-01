@@ -1,5 +1,6 @@
 package si.uni.lj.prpo.projekt04;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,8 +29,10 @@ public class MenuItem {
 
     private Boolean available = true;
 
+    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
     private LocalDateTime createdAt;
 
+    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
     private LocalDateTime updatedAt;
 
     @ElementCollection

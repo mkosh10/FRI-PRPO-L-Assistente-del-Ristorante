@@ -25,6 +25,10 @@ public class EmployeeBean {
         return employeeList.getResultList();
     }
 
+    public int getEmployeesListSize(){
+        return getAllEmployees().size();
+    }
+
     public Employee getEmployeeWithId(Integer id){
         try {
 

@@ -1,4 +1,5 @@
 package si.uni.lj.prpo.projekt04.DTOs;
+import javax.json.bind.annotation.JsonbDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -9,9 +10,10 @@ public class ReservationDTO {
     private Date reservationDate;
     private String specialRequests;
     private String tableAssigned;
+
+    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
     private LocalDateTime arrivalTime;
     private String discountCode;
-    private LocalDateTime createdAt;
 
     public String getCustomerName() {
         return customerName;
@@ -78,13 +80,6 @@ public class ReservationDTO {
         this.discountCode = discountCode;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 
 
 }
