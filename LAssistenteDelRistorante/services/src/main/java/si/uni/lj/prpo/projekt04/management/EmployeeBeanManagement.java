@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class EmployeeBeanManagement {
 
-    private final Logger LOG = Logger.getLogger(ReservationBean.class.getName());
+    private final Logger LOG = Logger.getLogger(EmployeeBeanManagement.class.getName());
     @Inject
     private EmployeeBean employeeBean;
 

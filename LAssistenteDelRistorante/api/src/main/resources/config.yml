@@ -9,11 +9,7 @@ kumuluzee:
       username: username
       password: password123
       max-pool-size: 20
-#  rest-client:
-#    registrations:
-#      - class: priporocilni-sistem-api
-#        url: http://localhost:8080/v1
-#        read-timeout: 5000
+
   dev:
     scan-libraries:
       - entities

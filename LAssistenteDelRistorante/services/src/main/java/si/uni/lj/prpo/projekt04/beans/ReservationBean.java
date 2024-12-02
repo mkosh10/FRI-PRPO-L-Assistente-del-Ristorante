@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.*;
 import java.util.logging.Logger;
 
-@ApplicationScoped
+@RequestScoped
 public class ReservationBean {
     @PersistenceContext(unitName = "l-assistente-del-ristorante-jpa")
     private EntityManager em;

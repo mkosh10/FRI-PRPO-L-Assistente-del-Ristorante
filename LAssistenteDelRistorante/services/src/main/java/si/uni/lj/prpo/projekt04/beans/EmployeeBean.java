@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 @RequestScoped
 public class EmployeeBean {
-    private final Logger LOG = Logger.getLogger(ReservationBean.class.getName());
+    private final Logger LOG = Logger.getLogger(EmployeeBean.class.getName());
     @PersistenceContext(unitName = "l-assistente-del-ristorante-jpa")
     private EntityManager em;
 

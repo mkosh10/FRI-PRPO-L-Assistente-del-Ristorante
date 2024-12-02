@@ -9,47 +9,37 @@ import java.util.List;
 
 @Entity
 @NamedQueries(value = {
-        @NamedQuery(name= "Meal.getAll", query = "SELECT m FROM MenuItem m"),
-        @NamedQuery(name = "Meal.getMeal", query = "SELECT m FROM MenuItem m WHERE m.id = :id"),
+        @NamedQuery(name= "Menu.getAll", query = "SELECT m FROM MenuItem m"),
+        @NamedQuery(name = "Menu.getMenuItem", query = "SELECT m FROM MenuItem m WHERE m.id = :id"),
 })
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
     private String name;
-
     private String description;
-
-    private BigDecimal price;
-
-
+    private double price;
     private String category;
-
-    private Boolean available = true;
-
-    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
-    private LocalDateTime createdAt;
-
-    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
+    private boolean isAvailable;
+    private boolean isVegetarian;
+    private boolean isVegan;
+    private boolean isGlutenFree;
+    private String ingredients;
+    private int calories;
     private LocalDateTime updatedAt;
 
-    @ElementCollection
-    private List<String> ingredients = new ArrayList<>();
-    private int calories;
-
-
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+
+    public Integer getId() {
+        return id;
     }
 
 
@@ -61,7 +51,6 @@ public class MenuItem {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -70,11 +59,11 @@ public class MenuItem {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -86,20 +75,44 @@ public class MenuItem {
         this.category = category;
     }
 
-    public Boolean getAvailable() {
-        return available;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public boolean isVegetarian() {
+        return isVegetarian;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public void setVegetarian(boolean vegetarian) {
+        isVegetarian = vegetarian;
+    }
+
+    public boolean isVegan() {
+        return isVegan;
+    }
+
+    public void setVegan(boolean vegan) {
+        isVegan = vegan;
+    }
+
+    public boolean isGlutenFree() {
+        return isGlutenFree;
+    }
+
+    public void setGlutenFree(boolean glutenFree) {
+        isGlutenFree = glutenFree;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     public int getCalories() {
@@ -108,13 +121,5 @@ public class MenuItem {
 
     public void setCalories(int calories) {
         this.calories = calories;
-    }
-
-
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
     }
 }
