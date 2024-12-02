@@ -1,0 +1,30 @@
+kumuluzee:
+  name: l-assistente-del-ristorante
+  version: 1.0.0
+  env:
+    name: dev
+  datasources:
+    - jndi-name: jdbc/LAssistenteDelRistoranteDS
+      connection-url: jdbc:postgresql://localhost:8023/prpodb
+      username: username
+      password: password123
+      max-pool-size: 20
+
+  dev:
+    scan-libraries:
+      - entities
+      - services
+
+#  health:
+#    checks:
+#      data-source-health-check:
+#        type: liveness
+#        jndi-name: jdbc/NakupovalniSeznamiDS
+#  rest-client:
+#    registrations:
+#      - class: priporocilni-sistem-api
+#        url: http://localhost:8081/v1
+#        read-timeout: 5000
+#integrations:
+#  priporocilni-sistem:
+#    base-url: http://localhost:8080/v1
