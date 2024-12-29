@@ -88,13 +88,13 @@ public class MenuBeanManagement {
             if (menuItemDTO.getIngredients() != null) {
                 currentMenuItem.setIngredients(menuItemDTO.getIngredients());
             }
-            if (menuItemDTO.getCalories() > 0) { // Assuming calories should be positive
+            if (menuItemDTO.getCalories() > 0) {
                 currentMenuItem.setCalories(menuItemDTO.getCalories());
             }
 
-            currentMenuItem.setUpdatedAt(LocalDateTime.now()); // Assuming you have an updatedAt field for tracking
+            currentMenuItem.setUpdatedAt(LocalDateTime.now());
 
-            return menuBean.updateMenuItem(currentMenuItem); // Assuming you have
+            return menuBean.updateMenuItem(currentMenuItem);
         }
 
         return false;

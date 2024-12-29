@@ -34,7 +34,9 @@ public class Reservation {
 
     private LocalDateTime updatedAt;
 
-
+    public Integer getId() {
+        return id;
+    }
 
     public String getCustomerName() {
         return customerName;

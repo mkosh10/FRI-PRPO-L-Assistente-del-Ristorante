@@ -34,7 +34,7 @@ public class MenuSource {
     @APIResponses({
             @APIResponse(description = "List of menu items retrieved successfully.", responseCode = "200", content = @Content(schema = @Schema(implementation = MenuItemDTO.class)))
     })
-    public Response getAllEmployees(){
+    public Response getAllMenuItems(){
         return Response
                 .ok(menuBean.getAllMenuItems())
                 .header("X-Total-Count", menuBean.getMenuListSize())
