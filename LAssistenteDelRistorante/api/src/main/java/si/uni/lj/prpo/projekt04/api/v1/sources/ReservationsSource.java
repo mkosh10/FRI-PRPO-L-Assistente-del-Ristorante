@@ -1,6 +1,7 @@
 package si.uni.lj.prpo.projekt04.api.v1.sources;
 
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -20,6 +21,7 @@ import javax.ws.rs.core.Response;
 @Path("/reservations")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@CrossOrigin(supportedMethods = "GET, PUT, POST, DELETE")
 @Tag(name = "Reservations", description = "Operations related to managing reservations")
 
 public class ReservationsSource {

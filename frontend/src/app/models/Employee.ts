@@ -6,5 +6,6 @@ export class Employee {
   position?: string;
   hireDate?: string;
   salary?: number;
+  updatedAt? : string;
 }
 

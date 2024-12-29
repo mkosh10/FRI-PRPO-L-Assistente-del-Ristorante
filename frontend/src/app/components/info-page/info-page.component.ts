@@ -5,7 +5,7 @@ import {Employee} from "../../models/Employee";
 import {Reservation} from "../../models/Reservation";
 import {MenuItem} from "../../models/MenuItem";
 import {RestaurantService} from "../../../services/RestaurantService"
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {routes} from "../../app.routes";
 import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
@@ -27,14 +27,14 @@ export class InfoPageComponent implements OnInit{
   id!: number;
   type!: string;
   data!:  Employee | Reservation | MenuItem;
-  constructor(private route: ActivatedRoute, private restaurantService: RestaurantService) {
+  constructor(private route: ActivatedRoute, private router: Router, private restaurantService: RestaurantService) {
   }
 
   ngOnInit(){
     this.route.params.subscribe(params => {
       this.id = +params['id']
       this.type = params['type']
-      this.getById(this.type, this.id).then(r => console.log("reposneeee e", r))
+      this.getById(this.type, this.id)
 
     })
   }
@@ -51,10 +51,12 @@ export class InfoPageComponent implements OnInit{
       } else {
 
         console.error("Invalid type", type, id)
+        this.router.navigate(['/NotFound']);
       }
       console.log(this.data)
     } catch(error) {
       console.error("Error fetching data. Error Message : ", error)
+        this.router.navigate(['/NotFound']);
     }
   }
   asEmployee(): Employee | null {

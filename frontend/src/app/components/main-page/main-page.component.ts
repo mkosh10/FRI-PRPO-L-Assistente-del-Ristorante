@@ -4,6 +4,7 @@ import {CardComponent} from "../card/card.component";
 import {Employee} from "../../models/Employee";
 import {Reservation} from "../../models/Reservation";
 import {MenuItem} from "../../models/MenuItem";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main-page',
@@ -19,6 +20,9 @@ import {MenuItem} from "../../models/MenuItem";
 export class MainPageComponent implements OnInit{
  ngOnInit(){
    console.log("MAIN PAGE INITIALIZED")
+ }
+
+ constructor(private router: Router) {
  }
   selectedListName : string = "Reservations"
   reservations : Reservation[]  = [
@@ -251,12 +255,24 @@ export class MainPageComponent implements OnInit{
     },
   ];
 
+
+
   setSelectedList(listName : string) : void{
     this.selectedListName = listName
     console.log(this.selectedListName)
   }
 
   viewClickedObject(object : Reservation| MenuItem |  Employee ){
-    console.log("testtt", object)
+
+    if((object as Reservation).reservationId != null){
+      this.router.navigate(['/details', 'reservations', (object as Reservation).reservationId]);
+    } else if ((object as Employee).employeeId != null){
+      this.router.navigate(['/details', 'employees', (object as Employee).employeeId]);
+
+    } else if((object as MenuItem).menuItemId != null){
+      this.router.navigate(['/details', 'menu', (object as MenuItem).menuItemId]);
+    } else {
+      console.log(object)
+    }
   }
 }
