@@ -1,1 +1,58 @@
-<p>info-page works!</p>
+<div class="main-container">
+  <div class="inner-container">
+
+    <div class="reservationCard" *ngIf="asReservation()?.reservationId!= undefined">
+      <div class="left-card-part">
+        <div>Customer Name</div>
+        <div>Customer Contact Info</div>
+        <div>Number of guests</div>
+        <div>Reservation date</div>
+        <div>Assigned table</div>
+        <div>Special requests</div>
+      </div>
+      <div class="right-card-part">
+        <div>{{ asReservation()?.customerName }}</div>
+        <div>{{ asReservation()?.customerContactInfo }}</div>
+        <div>{{ asReservation()?.numberOfGuests }}</div>
+        <div>{{ asReservation()?.reservationDate }}</div>
+        <div>{{ asReservation()?.tableAssigned }}</div>
+        <div>{{ asReservation()?.specialRequests ?? '/'}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .main-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    /*margin-top: 80px*/
+  }
+
+  .inner-container {
+    margin-top: 80px;
+    background-color: blueviolet;
+    display: flex;
+    width: 80%;
+    height: 620px;
+    justify-content: space-around;
+    border: solid 2px gray;
+    border-radius: 15px;
+    background-color: rgba(232, 232, 232, 0.89);
+  }
+
+
+  .reservationCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    background-image: url("assets/card_reservation_background.png");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+</style>

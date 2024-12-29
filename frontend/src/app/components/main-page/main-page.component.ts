@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgFor, NgIf} from "@angular/common";
 import {CardComponent} from "../card/card.component";
 import {Employee} from "../../models/Employee";
@@ -16,8 +16,10 @@ import {MenuItem} from "../../models/MenuItem";
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
-export class MainPageComponent {
-
+export class MainPageComponent implements OnInit{
+ ngOnInit(){
+   console.log("MAIN PAGE INITIALIZED")
+ }
   selectedListName : string = "Reservations"
   reservations : Reservation[]  = [
     {
