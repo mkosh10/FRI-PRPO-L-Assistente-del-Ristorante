@@ -1,5 +1,5 @@
 export class Reservation {
-  reservationId?: number;
+  id?: number;
   customerName?: string;
   customerContactInfo?: string;
   numberOfGuests?: number;

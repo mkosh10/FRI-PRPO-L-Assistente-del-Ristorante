@@ -22,11 +22,10 @@ import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 })
 export class InfoPageComponent implements OnInit{
 
-  @Input() infoData!: Employee | Reservation | MenuItem;
-
   id!: number;
   type!: string;
-  data!:  Employee | Reservation | MenuItem;
+  infoData!:  Employee | Reservation | MenuItem;
+  popupMessage: string | null = null;
   constructor(private route: ActivatedRoute, private router: Router, private restaurantService: RestaurantService) {
   }
 
@@ -35,29 +34,63 @@ export class InfoPageComponent implements OnInit{
       this.id = +params['id']
       this.type = params['type']
       this.getById(this.type, this.id)
-
     })
   }
 
   async getById(type: string, id : number){
     try {
       if(type ==='reservations'){
-        this.data = await this.restaurantService.getReservationById(id)
+        this.infoData = await this.restaurantService.getReservationById(id)
       } else if (type ==='employees'){
-        this.data = await  this.restaurantService.getEmployeeById(id)
+        this.infoData = await  this.restaurantService.getEmployeeById(id)
       } else if(type === 'menu'){
-        this.data = await  this.restaurantService.getMenuItemById(id)
+        this.infoData = await  this.restaurantService.getMenuItemById(id)
 
       } else {
 
         console.error("Invalid type", type, id)
         this.router.navigate(['/NotFound']);
       }
-      console.log(this.data)
+      console.log(this.infoData)
+      console.log(this.asReservation()?.id)
     } catch(error) {
       console.error("Error fetching data. Error Message : ", error)
         this.router.navigate(['/NotFound']);
     }
+  }
+
+  deleteThisData() {
+    try {
+      console.log("delete this data called")
+      console.log(this.infoData)
+      if(this.type ==='employees' && this.asEmployee()?.id != null) {
+        this.restaurantService.deleteEmployeeId(this.asEmployee()?.id!!).then(res => {
+          this.showPopupMessage("Item deleted successfully!")
+        })
+
+      } else if(this.type ==='reservations' && this.asReservation()?.id != null) {
+        this.restaurantService.deleteReservationById(this.asReservation()?.id!!).then(res => {
+          this.showPopupMessage("Item deleted successfully!")
+        })
+      } else if(this.type ==='menu' && this.asMenuItem()?.id != null) {
+        this.restaurantService.deleteMenuItemById(this.asMenuItem()?.id!!).then(res => {
+          this.showPopupMessage("Item deleted successfully!")
+        })
+      } else {
+        console.log("nothing happened")
+      }
+    } catch(error) {
+      this.showPopupMessage("Something went wrong")
+      console.error("Delete details error:", error)
+    }
+  }
+
+  showPopupMessage(message: string){
+    this.popupMessage = message
+    setTimeout(() => {
+      this.popupMessage = null;
+      this.router.navigate(['/']);
+    }, 3000);
   }
   asEmployee(): Employee | null {
     return this.infoData as Employee;

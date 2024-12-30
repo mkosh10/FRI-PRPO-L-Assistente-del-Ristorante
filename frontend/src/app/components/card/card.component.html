@@ -1,6 +1,6 @@
 <div class="main-card-container">
   <div class="inner-card-container">
-    <div class="reservationCard" *ngIf="asReservation()?.reservationId!= undefined">
+    <div class="reservationCard"  *ngIf="selectedListName === 'Reservations'">
       <div class="left-card-part">
         <div>Customer Name</div>
         <div>Customer Contact Info</div>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="menuItemCard" *ngIf="asMenuItem()?.menuItemId!= undefined">
+    <div class="menuItemCard"  *ngIf="selectedListName === 'MenuItems'">
       <div class="left-card-part">
         <div>Meal Name</div>
         <div>Price</div>
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="employeeCard" *ngIf="asEmployee()?.employeeId!= undefined">
+    <div class="employeeCard"  *ngIf="selectedListName === 'Employees'">
       <div class="left-card-part">
         <div>First Name</div>
         <div>Last Name</div>

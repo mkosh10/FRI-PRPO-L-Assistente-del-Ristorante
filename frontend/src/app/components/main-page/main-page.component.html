@@ -34,19 +34,19 @@
 
       <div class="list" *ngIf="selectedListName === 'Reservations'">
         <div *ngFor="let r of reservations">
-          <app-card (click)="viewClickedObject(r)"[cardData]="r"></app-card>
+          <app-card (click)="viewClickedObject(r)" [selectedListName]="selectedListName" [cardData]="r"></app-card>
         </div>
       </div>
 
       <div class="list" *ngIf="selectedListName === 'MenuItems'">
         <div *ngFor="let m of menuItems">
-          <app-card (click)="viewClickedObject(m)" [cardData]="m"></app-card>
+          <app-card (click)="viewClickedObject(m)" [selectedListName]="selectedListName" [cardData]="m"></app-card>
         </div>
       </div>
 
       <div class="list" *ngIf="selectedListName === 'Employees'">
         <div *ngFor="let e of employees">
-          <app-card (click)="viewClickedObject(e)" [cardData]="e"></app-card>
+          <app-card (click)="viewClickedObject(e)" [selectedListName]="selectedListName" [cardData]="e"></app-card>
         </div>
       </div>
     </div>

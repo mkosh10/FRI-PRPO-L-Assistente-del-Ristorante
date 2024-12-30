@@ -1,7 +1,10 @@
 <div class="main-container">
+  <div *ngIf="popupMessage" class="popup">{{ popupMessage }}</div>
   <div class="inner-container">
-
-    <div class="reservationCard" *ngIf="asReservation()?.reservationId!= undefined">
+    <h4 *ngIf="type === 'reservations'">Reservation Details</h4>
+    <h4 *ngIf="type === 'employees'">Employee Details</h4>
+    <h4 *ngIf="type === 'menu'">Meal Details</h4>
+    <div class="reservationCard" *ngIf="type === 'reservations'">
       <div class="left-card-part">
         <div>Customer Name</div>
         <div>Customer Contact Info</div>
@@ -16,14 +19,74 @@
         <div>{{ asReservation()?.numberOfGuests }}</div>
         <div>{{ asReservation()?.reservationDate }}</div>
         <div>{{ asReservation()?.tableAssigned }}</div>
-        <div>{{ asReservation()?.specialRequests ?? '/'}}</div>
+        <div>{{ asReservation()?.specialRequests ?? '/' }}</div>
       </div>
     </div>
+
+
+    <div class="menuItemCard" *ngIf="type === 'menu'">
+      <div class="left-card-part">
+        <div>Meal Name</div>
+        <div>Price</div>
+        <div>Calories</div>
+        <div>Available</div>
+        <div>Vegetarian</div>
+        <div>Vegan</div>
+        <div>Gluten Free</div>
+        <div>Ingredients</div>
+        <div>Description</div>
+      </div>
+      <div class="right-card-part long-list">
+        <div>{{ asMenuItem()?.name }}</div>
+        <div>{{ asMenuItem()?.price }}</div>
+        <div>{{ asMenuItem()?.calories }} kcal</div>
+        <div>{{ asMenuItem()?.isAvailable ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.isVegetarian ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.isVegan ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.isGlutenFree ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.ingredients }}</div>
+        <div>{{ asMenuItem()?.description }}</div>
+      </div>
+    </div>
+
+    <div class="employeeCard" *ngIf="type === 'employees'">
+      <div class="left-card-part">
+        <div>First Name</div>
+        <div>Last Name</div>
+        <div>Email</div>
+        <div>Position</div>
+        <div>Hire Date</div>
+        <div>Salary</div>
+        <div>Last updated</div>
+      </div>
+      <div class="right-card-part">
+        <div>{{ asEmployee()?.firstName }}</div>
+        <div>{{ asEmployee()?.lastName }}</div>
+        <div>{{ asEmployee()?.email }}</div>
+        <div>{{ asEmployee()?.position }}</div>
+        <div>{{ asEmployee()?.hireDate }}</div>
+        <div>{{ asEmployee()?.salary }}</div>
+        <div>{{ asEmployee()?.updatedAt }}</div>
+
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button (click)="deleteThisData()" class="button-color-delete button-elegante">delete</button>
+      <button class="button-color-edit button-elegante">edit</button>
+    </div>
+
+
   </div>
 </div>
 
 
 <style>
+
+  .long-list {
+    font-size: 20px;
+  }
+
   .main-container {
     display: flex;
     width: 100%;
@@ -37,21 +100,157 @@
     width: 80%;
     height: 620px;
     justify-content: space-around;
+    align-items: center;
     border: solid 2px gray;
     border-radius: 15px;
     background-color: rgba(232, 232, 232, 0.89);
+    font-size: 23px;
+    font-family: "Yu Gothic Medium";
+    flex-direction: column;
   }
 
 
   .reservationCard {
+    /*background-color: #FF5E62;*/
     justify-content: space-between;
     display: flex;
     border-radius: 10px;
     width: 100%;
+    height: 80%;
+    margin-left: 25px;
+    margin-right: 25px;
     background-image: url("assets/card_reservation_background.png");
     background-size: 25%;
     background-repeat: no-repeat;
     background-position: center;
+    align-items: center;
+
   }
+
+  .menuItemCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    height: 80%;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-image: url("assets/card_menu_background.png");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    overflow-y: auto;
+
+  }
+
+  .employeeCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    background-image: url("assets/card_employee_background.jpg");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .left-card-part {
+    width: 40%;
+    /*background-color: #FF9966;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .right-card-part {
+    width: 40%;
+    /*background-color: #FF9966;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  }
+
+
+  .button-color-delete {
+    border: 2px solid #e31212;
+    background-color: #ff3838;
+    color: #ffffff;
+  }
+
+  .button-color-edit {
+    border: 2px solid #ec792a;
+    background-color: #ffa666;
+    color: #ffffff;
+  }
+
+  /*from uiverse.io*/
+  .button-elegante {
+    padding: 5px 20px;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+  }
+
+  .button-elegante::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+  }
+
+  .button-elegante:hover::after {
+    transform: scale(4);
+  }
+
+  .button-elegante:hover {
+    border-color: #98d765;
+    background: rgba(239, 225, 207, 0.94);
+    color: #656060;
+  }
+
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 80px;
+    margin-bottom: 15px;
+  }
+
 
 </style>

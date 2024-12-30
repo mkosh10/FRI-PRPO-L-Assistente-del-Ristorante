@@ -16,6 +16,7 @@ import {NgFor, NgIf} from "@angular/common";
 export class CardComponent {
 
   @Input() cardData!: Employee | Reservation | MenuItem;
+  @Input() selectedListName!: string ;
   asEmployee(): Employee | null {
     return this.cardData as Employee;
   }
