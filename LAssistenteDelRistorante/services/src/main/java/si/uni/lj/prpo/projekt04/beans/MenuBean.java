@@ -1,20 +1,47 @@
 package si.uni.lj.prpo.projekt04.beans;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.parser.JSONParser;
+import si.uni.lj.prpo.projekt04.DTOs.external.Item;
+import si.uni.lj.prpo.projekt04.DTOs.external.Nutrition;
 import si.uni.lj.prpo.projekt04.MenuItem;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.stream.JsonLocation;
+import javax.json.stream.JsonParser;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
 @RequestScoped
 public class MenuBean {
+
+    private Client httpClient;
+    private String API_URL;
+    private String API_KEY;
+
+    private JsonParser parser;
     @PersistenceContext(unitName = "l-assistente-del-ristorante-jpa")
     private EntityManager em;
+
+    @PostConstruct
+    public void init(){
+        httpClient = ClientBuilder.newClient();
+        API_URL = "https://api.calorieninjas.com/v1/nutrition";
+        API_KEY = "7WOjamiscs0YLNXltficlg==1Axu7GutiFny1nJe";
+    }
 
     private final Logger LOG = Logger.getLogger(MenuBean.class.getName());
 
@@ -40,6 +67,8 @@ public class MenuBean {
     @Transactional
     public boolean createNewMenuItem(MenuItem menuItem){
         try {
+            int totalCalories = getCalories(menuItem.getIngredients());
+            menuItem.setCalories(totalCalories);
             em.persist(menuItem);
             return true;
 
@@ -49,6 +78,39 @@ public class MenuBean {
         }
 
     }
+
+
+public int getCalories(String ingredients){
+//    Client client = ClientBuilder.newClient();
+    WebTarget target = httpClient.target(API_URL).queryParam("query", ingredients);
+    try {
+        String response = target.request(MediaType.APPLICATION_JSON)
+                .header("X-Api-Key", API_KEY)
+                .get(String.class);
+        LOG.info("response" + response);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Nutrition nutritionObject = mapper.readValue(response, Nutrition.class);
+        LOG.info("nutritionObject e" + nutritionObject);
+        int totalCalories = 0;
+        if(nutritionObject!= null && nutritionObject.getItems() != null){
+            for(Item item : nutritionObject.getItems()){
+                totalCalories += item.getCalories();
+            }
+        } else {
+            LOG.info("NutritionObject == null");
+        }
+
+        return totalCalories;
+
+    } catch(Exception e){
+        e.printStackTrace();
+    } finally {
+        httpClient.close();
+    }
+    return -1;
+}
+
 
     @Transactional
     public boolean updateMenuItem(MenuItem menuItem){

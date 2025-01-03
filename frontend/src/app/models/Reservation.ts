@@ -6,4 +6,5 @@ export class Reservation {
   reservationDate?: string;
   specialRequests?: string;
   tableAssigned?: number;
+  arrivalTime? : string;
 }

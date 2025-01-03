@@ -103,6 +103,10 @@ export class InfoPageComponent implements OnInit{
     return this.infoData as MenuItem;
   }
 
+  navigateToEdit(): void {
+    this.router.navigate([`/edit/${this.type}/${this.id}`]);
+  }
+
 
 
 

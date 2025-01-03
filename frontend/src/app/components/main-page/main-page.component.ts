@@ -93,4 +93,11 @@ export class MainPageComponent implements OnInit{
       console.error("GetAllReservations() function", error)
     }
   }
+
+  navigateToAddNewItemPage(type: string){
+    this.router.navigate(['/create', type]);
+  }
+
+
+
 }

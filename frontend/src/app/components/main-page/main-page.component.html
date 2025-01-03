@@ -12,15 +12,15 @@
         <div class="bottom-part">
 
           <ul class="unordered-list-new">
-            <li style="--i:#FF9966;--j:#FF5E62;">
+            <li (click)="navigateToAddNewItemPage('reservations')" style="--i:#FF9966;--j:#FF5E62;">
               <span class="icon">🛎️ </span>
               <span class="title">New reservation</span>
             </li>
-            <li style="--i:#FF9966;--j:#FF5E62;">
+            <li (click)="navigateToAddNewItemPage('menu')" style="--i:#FF9966;--j:#FF5E62;">
               <span class="icon">🍝 </span>
               <span class="title">New meal</span>
             </li>
-            <li style="--i:#FF9966;--j:#FF5E62;">
+            <li (click)="navigateToAddNewItemPage('employees')" style="--i:#FF9966;--j:#FF5E62;">
               <span class="icon">👨🏻‍🍳 </span>
               <span class="title">New employee</span>
             </li>

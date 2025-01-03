@@ -51,13 +51,13 @@ export class RestaurantService {
   // POST CALLS
 
   addNewReservation(reservation : Reservation): Promise<any> {
-    return firstValueFrom(this.http.put<any>(`${this.apiUrl}/reservations`, reservation));
+    return firstValueFrom(this.http.post<any>(`${this.apiUrl}/reservations`, reservation));
   }
   addNewEmployee(employee : Employee): Promise<any> {
-    return firstValueFrom(this.http.put<any>(`${this.apiUrl}/employees`, employee));
+    return firstValueFrom(this.http.post<any>(`${this.apiUrl}/employees`, employee));
   }
   addNewMenuItem(menuItem : MenuItem): Promise<any> {
-    return firstValueFrom(this.http.put<any>(`${this.apiUrl}/menu`, menuItem));
+    return firstValueFrom(this.http.post<any>(`${this.apiUrl}/menu`, menuItem));
   }
 
   //DELETE

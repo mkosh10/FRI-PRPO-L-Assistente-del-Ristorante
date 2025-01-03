@@ -1,5 +1,6 @@
 package si.uni.lj.prpo.projekt04.DTOs;
 import javax.json.bind.annotation.JsonbDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -7,11 +8,13 @@ public class ReservationDTO {
     private String customerName;
     private String customerContactInfo;
     private Integer numberOfGuests;
-    private Date reservationDate;
+
+    @JsonbDateFormat("yyyy-MM-dd")
+    private LocalDate reservationDate;
     private String specialRequests;
     private String tableAssigned;
 
-    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm:ss")
+    @JsonbDateFormat("yyyy-MM-dd' 'HH:mm")
     private LocalDateTime arrivalTime;
     private String discountCode;
 
@@ -39,11 +42,11 @@ public class ReservationDTO {
         this.numberOfGuests = numberOfGuests;
     }
 
-    public Date getReservationDate() {
+    public LocalDate getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(Date reservationDate) {
+    public void setReservationDate(LocalDate reservationDate) {
         this.reservationDate = reservationDate;
     }
 
