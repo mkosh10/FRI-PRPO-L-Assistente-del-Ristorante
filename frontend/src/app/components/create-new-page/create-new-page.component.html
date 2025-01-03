@@ -1,0 +1,308 @@
+<div class="main-container">
+  <div *ngIf="popupMessage" class="popup">{{ popupMessage }}</div>
+  <div class="inner-container">
+    <h4 *ngIf="type === 'reservations'">Create new reservation</h4>
+    <h4 *ngIf="type === 'employees'">Add new employee details</h4>
+    <h4 *ngIf="type === 'menu'">Add new meal</h4>
+
+    <form class="form" [formGroup]="editForm">
+      <div class="reservationCard" *ngIf="type === 'reservations'">
+        <div class="left-card-part">
+          <div>Customer Name</div>
+          <div>Arrival time</div>
+          <div>Customer Contact Info</div>
+          <div>Number of Guests</div>
+          <div>Reservation Date</div>
+          <div>Assigned Table</div>
+          <div>Special Requests</div>
+        </div>
+        <div class="right-card-part">
+          <input formControlName="customerName" type="text" />
+          <input formControlName="arrivalTime" type="datetime-local" />
+          <input formControlName="customerContactInfo" type="text" />
+          <input formControlName="numberOfGuests" type="number" />
+          <input formControlName="reservationDate" type="date" />
+          <input formControlName="tableAssigned" type="text" />
+          <input formControlName="specialRequests" type="text" />
+        </div>
+      </div>
+
+      <div class="menuItemCard" *ngIf="type === 'menu'">
+        <div class="left-card-part">
+          <div>Meal Name</div>
+          <div>Price</div>
+          <div>Calories</div>
+          <div>Available</div>
+          <div>Vegetarian</div>
+          <div>Vegan</div>
+          <div>Gluten Free</div>
+          <div>Ingredients</div>
+          <div>Description</div>
+        </div>
+        <div class="right-card-part long-list">
+          <input formControlName="name" type="text" />
+          <input formControlName="price" type="number" />
+          <input formControlName="calories" type="number" />
+          <select formControlName="isAvailable">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+          <select formControlName="isVegetarian">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+          <select formControlName="isVegan">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+          <select formControlName="isGlutenFree">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+          <textarea formControlName="ingredients"></textarea>
+          <textarea formControlName="description"></textarea>
+        </div>
+      </div>
+
+      <div class="employeeCard" *ngIf="type === 'employees'">
+        <div class="left-card-part">
+          <div>First Name</div>
+          <div>Last Name</div>
+          <div>Email</div>
+          <div>Position</div>
+          <div>Hire Date</div>
+          <div>Salary</div>
+        </div>
+        <div class="right-card-part">
+          <input formControlName="firstName" type="text" />
+          <input formControlName="lastName" type="text" />
+          <input formControlName="email" type="email" />
+          <input formControlName="position" type="text" />
+          <input formControlName="hireDate" type="date" />
+          <input formControlName="salary" type="number" />
+        </div>
+      </div>
+
+    </form>
+    <button (click)="createNewItem()" class="button-color-edit button-elegante">CONFIRM</button>
+
+  </div>
+</div>
+
+
+
+<style>
+
+  .long-list {
+    font-size: 20px;
+  }
+
+  .main-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    /*margin-top: 80px*/
+    height: 620px;
+  }
+
+  .inner-container {
+    /*background-color: #FF9966;*/
+    margin-top: 80px;
+    display: flex;
+    width: 80%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    border: solid 2px gray;
+    border-radius: 15px;
+    background-color: rgba(232, 232, 232, 0.89);
+    font-size: 23px;
+    font-family: "Yu Gothic Medium";
+    flex-direction: column;
+  }
+
+  .form {
+    display: flex;
+    width: 100%;
+  }
+  input {
+    font-size: 17px;
+    padding: 3px;
+    border: 1px solid #FF9966;
+    border-radius: 5px;
+    background-color: rgba(255, 153, 102, 0.44);;
+    font-family: "Yu Gothic Light";
+  }
+
+  select {
+    font-size: 17px;
+    padding: 3px;
+    border: 1px solid #FF9966;
+    border-radius: 5px;
+    background-color:rgba(255, 153, 102, 0.44);;
+    font-family: "Yu Gothic Light";
+  }
+
+
+  option {
+    font-size: 17px;
+    padding: 3px;
+    border: 1px solid #FF9966;
+    border-radius: 5px;
+    background-color:rgba(255, 255, 255, 0.4);
+    font-family: "Yu Gothic Light";
+  }
+
+  textarea {
+    display: flex;
+    width: 80%;
+    font-size: 17px;
+    padding: 3px;
+    border: 1px solid #FF9966;
+    border-radius: 5px;
+    background-color: rgba(255, 153, 102, 0.44);
+    font-family: "Yu Gothic Light";
+  }
+
+
+  .reservationCard {
+    /*background-color: #FF5E62;*/
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-image: url("assets/card_reservation_background.png");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+
+  }
+
+  .menuItemCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-image: url("assets/card_menu_background.png");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    overflow-y: auto;
+
+  }
+
+  .employeeCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    /*background-color: #FF9966;*/
+    background-image: url("assets/card_employee_background.jpg");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .left-card-part {
+    width: 40%;
+    /*background-color: #FF9966;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .right-card-part {
+    width: 40%;
+    /*background-color: #FF9966;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .popup {
+    font-size: 17px;
+    font-family: "Yu Gothic Medium";
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  }
+
+
+  .button-color-edit {
+    border: 2px solid #ec792a;
+    background-color: #ffa666;
+    color: #ffffff;
+    font-family: "Yu Gothic Light";
+  }
+
+  /*from uiverse.io*/
+  .button-elegante {
+    padding: 5px 20px;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+  }
+
+  .button-elegante::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+  }
+
+  .button-elegante:hover::after {
+    transform: scale(4);
+  }
+
+  .button-elegante:hover {
+    border-color: #98d765;
+    background: rgba(239, 225, 207, 0.94);
+    color: #656060;
+  }
+
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 80px;
+    margin-bottom: 15px;
+  }
+
+
+</style>

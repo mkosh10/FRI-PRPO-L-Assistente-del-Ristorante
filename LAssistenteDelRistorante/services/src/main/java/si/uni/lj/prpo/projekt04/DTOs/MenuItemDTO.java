@@ -5,7 +5,6 @@ public class MenuItemDTO {
     private String name;
     private String description;
     private double price;
-    private String category;
     private boolean isAvailable;
     private boolean isVegetarian;
     private boolean isVegan;
@@ -38,13 +37,6 @@ public class MenuItemDTO {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public boolean isAvailable() {
         return isAvailable;

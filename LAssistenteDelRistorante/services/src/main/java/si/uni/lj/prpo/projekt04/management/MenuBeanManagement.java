@@ -26,7 +26,6 @@ public class MenuBeanManagement {
         String name = menuItemDto.getName();
         String description = menuItemDto.getDescription();
         double price = menuItemDto.getPrice();
-        String category = menuItemDto.getCategory();
         boolean isAvailable = menuItemDto.isAvailable();
         boolean isVegetarian = menuItemDto.isVegetarian();
         boolean isVegan = menuItemDto.isVegan();
@@ -34,7 +33,7 @@ public class MenuBeanManagement {
         String ingredients = menuItemDto.getIngredients();
         int calories = menuItemDto.getCalories();
 
-        if (name == null || description == null || category == null) {
+        if (name == null || description == null) {
             LOG.info("Not every parameter is present in MenuItemDTO");
             return Optional.empty();
         }
@@ -43,7 +42,6 @@ public class MenuBeanManagement {
         menuItemEntity.setName(name);
         menuItemEntity.setDescription(description);
         menuItemEntity.setPrice(price);
-        menuItemEntity.setCategory(category);
         menuItemEntity.setAvailable(isAvailable);
         menuItemEntity.setVegetarian(isVegetarian);
         menuItemEntity.setVegan(isVegan);
@@ -77,9 +75,6 @@ public class MenuBeanManagement {
             if (menuItemDTO.getPrice() > 0) {
                 currentMenuItem.setPrice(menuItemDTO.getPrice());
             }
-            if (menuItemDTO.getCategory() != null) {
-                currentMenuItem.setCategory(menuItemDTO.getCategory());
-            }
             currentMenuItem.setAvailable(menuItemDTO.isAvailable());
             currentMenuItem.setVegetarian(menuItemDTO.isVegetarian());
             currentMenuItem.setVegan(menuItemDTO.isVegan());
@@ -88,13 +83,13 @@ public class MenuBeanManagement {
             if (menuItemDTO.getIngredients() != null) {
                 currentMenuItem.setIngredients(menuItemDTO.getIngredients());
             }
-            if (menuItemDTO.getCalories() > 0) { // Assuming calories should be positive
+            if (menuItemDTO.getCalories() > 0) {
                 currentMenuItem.setCalories(menuItemDTO.getCalories());
             }
 
-            currentMenuItem.setUpdatedAt(LocalDateTime.now()); // Assuming you have an updatedAt field for tracking
+            currentMenuItem.setUpdatedAt(LocalDateTime.now());
 
-            return menuBean.updateMenuItem(currentMenuItem); // Assuming you have
+            return menuBean.updateMenuItem(currentMenuItem);
         }
 
         return false;

@@ -6,6 +6,7 @@ import si.uni.lj.prpo.projekt04.beans.ReservationBean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class ReservationBeanManagement {
         String customerName = reservationDto.getCustomerName();
         String customerContactInfo = reservationDto.getCustomerContactInfo();
         Integer numberOfGuests = reservationDto.getNumberOfGuests();
-        Date reservationDate = reservationDto.getReservationDate();
+        LocalDate reservationDate = reservationDto.getReservationDate();
         String specialRequests = reservationDto.getSpecialRequests();
         String tableAssigned = reservationDto.getTableAssigned();
         LocalDateTime arrivalTime = reservationDto.getArrivalTime();

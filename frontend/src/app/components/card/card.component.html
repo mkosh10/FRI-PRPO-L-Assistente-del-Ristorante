@@ -1,0 +1,155 @@
+<div class="main-card-container">
+  <div class="inner-card-container">
+    <div class="reservationCard"  *ngIf="selectedListName === 'Reservations'">
+      <div class="left-card-part">
+        <div>Customer Name</div>
+        <div>Customer Contact Info</div>
+        <div>Number of guests</div>
+        <div>Reservation date</div>
+        <div>Assigned table</div>
+        <div>Special requests</div>
+      </div>
+      <div class="right-card-part">
+        <div>{{ asReservation()?.customerName }}</div>
+        <div>{{ asReservation()?.customerContactInfo }}</div>
+        <div>{{ asReservation()?.numberOfGuests }}</div>
+        <div>{{ asReservation()?.reservationDate }}</div>
+        <div>{{ asReservation()?.tableAssigned }}</div>
+        <div>{{ asReservation()?.specialRequests ?? '/'}}</div>
+      </div>
+    </div>
+
+    <div class="menuItemCard"  *ngIf="selectedListName === 'MenuItems'">
+      <div class="left-card-part">
+        <div>Meal Name</div>
+        <div>Price</div>
+        <div>Calories</div>
+        <div>Available</div>
+        <div>Vegetarian</div>
+        <div>Vegan</div>
+        <div>Gluten Free</div>
+        <div>Ingredients</div>
+        <div>Description</div>
+      </div>
+      <div class="right-card-part long-list">
+        <div>{{ asMenuItem()?.name}}</div>
+        <div>{{ asMenuItem()?.price}}</div>
+        <div>{{ asMenuItem()?.calories}} kcal</div>
+        <div>{{ asMenuItem()?.isAvailable ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.isVegetarian ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.isVegan ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.isGlutenFree ? 'Yes' : 'No' }}</div>
+        <div>{{ asMenuItem()?.ingredients}}</div>
+        <div>{{ asMenuItem()?.description}}</div>
+      </div>
+    </div>
+
+    <div class="employeeCard"  *ngIf="selectedListName === 'Employees'">
+      <div class="left-card-part">
+        <div>First Name</div>
+        <div>Last Name</div>
+        <div>Email</div>
+        <div>Position</div>
+        <div>Hire Date</div>
+        <div>Salary</div>
+      </div>
+      <div class="right-card-part">
+        <div>{{ asEmployee()?.firstName }}</div>
+        <div>{{ asEmployee()?.lastName }}</div>
+        <div>{{ asEmployee()?.email }}</div>
+        <div>{{ asEmployee()?.position }}</div>
+        <div>{{ asEmployee()?.hireDate }}</div>
+        <div>{{ asEmployee()?.salary }}</div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+<style>
+  .main-card-container {
+    background-color: rgba(232, 232, 232, 0.89);
+    width: 100%;
+    display: flex;
+    height: 170px;
+    border-radius: 10px;
+    font-family: "Yu Gothic Medium";
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inner-card-container {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    /*background-color: #6673ff;*/
+  }
+
+  .left-card-part {
+    /*background-color: #FF9966;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+  }
+
+  .right-card-part {
+    /*background-color: #FF9966;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+  }
+
+  .long-list{
+    width: 45%;
+  }
+
+
+
+  .reservationCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    background-image: url("assets/card_reservation_background.png");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .menuItemCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    background-image: url("assets/card_menu_background.png");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-y: auto;
+    height: 170px;
+  }
+
+  .employeeCard {
+    justify-content: space-between;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    background-image: url("assets/card_employee_background.jpg");
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>

@@ -1,6 +1,7 @@
 package si.uni.lj.prpo.projekt04.api.v1.sources;
 
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -23,6 +24,7 @@ import javax.ws.rs.core.Response;
 @Path("/employees")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@CrossOrigin(supportedMethods = "GET, PUT, POST, DELETE")
 @Tag(name = "Employees", description = "Operations related to managing restaurant employees, including adding, updating, and retrieving employee details")
 public class EmployeeSource {
     @Inject
@@ -56,7 +58,7 @@ public class EmployeeSource {
         if(employee != null){
             return Response
                     .ok(employee)
-                    .status(Response.Status.FOUND)
+                    .status(Response.Status.OK)
                     .build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

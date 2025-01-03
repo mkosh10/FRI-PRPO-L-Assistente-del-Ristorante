@@ -44,6 +44,9 @@ public class Employee {
         this.updatedAt = LocalDateTime.now();
     }
 
+    public Integer getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;
