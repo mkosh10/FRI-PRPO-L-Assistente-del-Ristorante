@@ -15,11 +15,14 @@ kumuluzee:
       - entities
       - services
 
-#  health:
-#    checks:
-#      data-source-health-check:
-#        type: liveness
-#        jndi-name: jdbc/NakupovalniSeznamiDS
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/LAssistenteDelRistoranteDS
+      http-health-check:
+        type: liveness
+        connection-url: https://api.calorieninjas.com/v1/nutrition
 #  rest-client:
 #    registrations:
 #      - class: priporocilni-sistem-api

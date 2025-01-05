@@ -41,10 +41,10 @@
             <groupId>com.kumuluz.ee.cors</groupId>
             <artifactId>kumuluzee-cors</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.kumuluz.ee.health</groupId>-->
-<!--            <artifactId>kumuluzee-health</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.kumuluz.ee.health</groupId>
+            <artifactId>kumuluzee-health</artifactId>
+        </dependency>
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
