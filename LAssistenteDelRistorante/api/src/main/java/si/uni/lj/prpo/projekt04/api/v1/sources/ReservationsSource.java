@@ -2,6 +2,7 @@ package si.uni.lj.prpo.projekt04.api.v1.sources;
 
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -10,13 +11,18 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import si.uni.lj.prpo.projekt04.DTOs.ReservationDTO;
+import si.uni.lj.prpo.projekt04.MenuItem;
+import si.uni.lj.prpo.projekt04.Reservation;
 import si.uni.lj.prpo.projekt04.beans.ReservationBean;
 import si.uni.lj.prpo.projekt04.management.ReservationBeanManagement;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @Path("/reservations")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -32,15 +38,29 @@ public class ReservationsSource {
     @Inject
     private ReservationBeanManagement reservationBeanManagement;
 
+    @Context
+    private UriInfo uriInfo;
+
     @GET
     @Operation(summary = "Get all reservations", description = "Returns all reservations")
     @APIResponses({
             @APIResponse(description = "List of reservations retrieved successfully.", responseCode = "200", content = @Content(schema = @Schema(implementation = ReservationDTO.class)))
     })
     public Response getReservations(){
+
+        final var query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Reservation> responseList = null;
+        long listSize = 0;
+        if(query == null){
+            responseList = reservationBean.getAllReservations();
+            listSize = reservationBean.getReservationListSize();
+        } else {
+            responseList = reservationBean.getAllReservations(query);
+            listSize = reservationBean.getReservationListSize(query);
+        }
         return Response
-                .ok(reservationBean.getAllReservations())
-                .header("X-Total-Count", reservationBean.getReservationListSize())
+                .ok(responseList)
+                .header("X-Total-Count", listSize)
                 .build();
     }
 

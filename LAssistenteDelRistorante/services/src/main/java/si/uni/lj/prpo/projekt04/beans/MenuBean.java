@@ -1,6 +1,8 @@
 package si.uni.lj.prpo.projekt04.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import org.json.simple.parser.JSONParser;
 import si.uni.lj.prpo.projekt04.DTOs.external.Item;
 import si.uni.lj.prpo.projekt04.DTOs.external.Nutrition;
@@ -52,6 +54,14 @@ public class MenuBean {
 
     public int getMenuListSize(){
         return getAllMenuItems().size();
+    }
+
+    public List<MenuItem> getAllMenuItems(QueryParameters query) {
+        return JPAUtils.queryEntities(this.em, MenuItem.class, query);
+    }
+
+    public long getMenuListSize(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(this.em, MenuItem.class, query);
     }
 
     public MenuItem getMenuItemWithId(Integer id){

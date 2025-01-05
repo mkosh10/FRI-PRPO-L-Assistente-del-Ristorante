@@ -1,6 +1,7 @@
 package si.uni.lj.prpo.projekt04.api.v1.sources;
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -9,13 +10,17 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import si.uni.lj.prpo.projekt04.DTOs.MenuItemDTO;
+import si.uni.lj.prpo.projekt04.MenuItem;
 import si.uni.lj.prpo.projekt04.beans.MenuBean;
 import si.uni.lj.prpo.projekt04.management.MenuBeanManagement;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @Path("/menu")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -24,6 +29,8 @@ import javax.ws.rs.core.Response;
 @Tag(name = "Menu", description = "Operations related to managing the restaurant's menu, including adding, updating, and retrieving menu items")
 public class MenuSource {
 
+    @Context
+    private UriInfo uriInfo;
     @Inject
     private MenuBean menuBean;
 
@@ -37,9 +44,20 @@ public class MenuSource {
             @APIResponse(description = "List of menu items retrieved successfully.", responseCode = "200", content = @Content(schema = @Schema(implementation = MenuItemDTO.class)))
     })
     public Response getAllMenuItems(){
+
+        final var query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<MenuItem> responseList = null;
+        long listSize = 0;
+        if(query == null){
+            responseList = menuBean.getAllMenuItems();
+            listSize = menuBean.getMenuListSize();
+        } else {
+            responseList = menuBean.getAllMenuItems(query);
+            listSize = menuBean.getMenuListSize(query);
+        }
         return Response
-                .ok(menuBean.getAllMenuItems())
-                .header("X-Total-Count", menuBean.getMenuListSize())
+                .ok(responseList)
+                .header("X-Total-Count", listSize)
                 .build();
     }
 
