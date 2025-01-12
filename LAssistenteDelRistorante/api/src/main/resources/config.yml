@@ -1,6 +1,12 @@
 kumuluzee:
   name: l-assistente-del-ristorante
   version: 1.0.0
+  openapi-mp:
+    ui:
+      mapping: /api-specs/ui
+    servlet:
+      mapping: /openapi
+
   env:
     name: dev
   datasources:
