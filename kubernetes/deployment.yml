@@ -21,11 +21,6 @@ spec:
             - containerPort: 80
               name: http
               protocol: TCP
-          resources:
-            requests:
-              cpu: "10m"
-            limits:
-              cpu: "50m"
 ---
 # Frontend service
 apiVersion: v1
@@ -64,6 +59,11 @@ spec:
             - containerPort: 8080
               name: backend
               protocol: TCP
+          resources:
+          requests:
+            cpu: "70m"
+          limits:
+            cpu: "300m"
 ---
 # Backend service
 apiVersion: v1
@@ -141,18 +141,18 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: frontend-hpa
+  name: backend-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: frontend-deployment
+    name: backend-deployment
   minReplicas: 1
   maxReplicas: 3
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
