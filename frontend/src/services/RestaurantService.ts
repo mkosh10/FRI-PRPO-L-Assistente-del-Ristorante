@@ -4,12 +4,15 @@ import {firstValueFrom, Observable} from 'rxjs';
 import {Reservation} from "../app/models/Reservation";
 import {Employee} from "../app/models/Employee";
 import {MenuItem} from "../app/models/MenuItem";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
-  private apiUrl = 'http://localhost:8080/v1';
+  private apiUrl = environment.apiUrl;
+  private isProd = environment.production
+  private appVersion = environment.appVersion
 
   constructor(private http: HttpClient) {}
 
@@ -71,6 +74,14 @@ export class RestaurantService {
   }
   deleteMenuItemById(id: number): Promise<any> {
     return firstValueFrom(this.http.delete<any>(`${this.apiUrl}/menu/${id}`));
+  }
+
+  getDevOrProd(){
+    return this.isProd
+  }
+
+  getVersion(){
+    return this.appVersion
   }
 
 
