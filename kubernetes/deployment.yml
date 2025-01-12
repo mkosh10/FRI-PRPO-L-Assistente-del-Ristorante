@@ -61,9 +61,9 @@ spec:
               protocol: TCP
           resources:
             requests:
-              cpu: "70m"
+              cpu: "200m"
             limits:
-              cpu: "300m"
+              cpu: "700m"
 ---
 # Backend service
 apiVersion: v1
