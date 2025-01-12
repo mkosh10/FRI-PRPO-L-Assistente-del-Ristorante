@@ -30,7 +30,10 @@ jobs:
           context: ./frontend
           push: true
           tags: mk0352/prpo2425:frontend
-
+      - name: Build backend
+        run: |
+          cd LAssistenteDelRistorante
+          mvn clean package
       - name: Build and push backend
         uses: docker/build-push-action@v5
         with:
