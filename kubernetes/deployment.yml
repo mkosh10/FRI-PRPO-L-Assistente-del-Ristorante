@@ -76,10 +76,11 @@ spec:
 ---
 # Database deployment
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: db-deployment
 spec:
+  serviceName: "db-container"
   replicas: 1
   selector:
     matchLabels:
@@ -97,6 +98,18 @@ spec:
             - containerPort: 5432
               name: postgres
               protocol: TCP
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
 ---
 # Database service
 apiVersion: v1
