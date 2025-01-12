@@ -3,9 +3,8 @@ kumuluzee:
   version: 1.0.0
   openapi-mp:
     ui:
-      mapping: /api-specs/ui
-    servlet:
-      mapping: /openapi
+      server-auto-config:
+        enabled: true
 
   env:
     name: dev
@@ -29,11 +28,3 @@ kumuluzee:
       http-health-check:
         type: liveness
         connection-url: https://api.calorieninjas.com/v1/nutrition
-#  rest-client:
-#    registrations:
-#      - class: priporocilni-sistem-api
-#        url: http://localhost:8081/v1
-#        read-timeout: 5000
-#integrations:
-#  priporocilni-sistem:
-#    base-url: http://localhost:8080/v1
