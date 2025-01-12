@@ -60,10 +60,10 @@ spec:
               name: backend
               protocol: TCP
           resources:
-          requests:
-            cpu: "70m"
-          limits:
-            cpu: "300m"
+            requests:
+              cpu: "70m"
+            limits:
+              cpu: "300m"
 ---
 # Backend service
 apiVersion: v1
@@ -137,7 +137,7 @@ spec:
   selector:
     app: db
 ---
-# Horizontal Pod Autoscaler for Frontend
+# Horizontal Pod Autoscaler / Backend
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
