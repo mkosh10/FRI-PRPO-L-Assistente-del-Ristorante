@@ -98,6 +98,14 @@ export class MainPageComponent implements OnInit{
     this.router.navigate(['/create', type]);
   }
 
+  getDevOrProd(){
+   return this.restaurantService.getDevOrProd() ? "Prod" : "Dev"
+  }
+
+  getAppVersion(){
+   return this.restaurantService.getVersion()
+  }
+
 
 
 }

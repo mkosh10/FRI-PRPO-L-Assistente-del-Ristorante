@@ -1,7 +1,10 @@
 package si.uni.lj.prpo.projekt04.beans;
 
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.uni.lj.prpo.projekt04.Employee;
+import si.uni.lj.prpo.projekt04.MenuItem;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -27,6 +30,14 @@ public class EmployeeBean {
 
     public int getEmployeesListSize(){
         return getAllEmployees().size();
+    }
+
+    public List<Employee> getAllEmployees(QueryParameters query) {
+        return JPAUtils.queryEntities(this.em, Employee.class, query);
+    }
+
+    public long getEmployeesListSize(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(this.em, Employee.class, query);
     }
 
     public Employee getEmployeeWithId(Integer id){

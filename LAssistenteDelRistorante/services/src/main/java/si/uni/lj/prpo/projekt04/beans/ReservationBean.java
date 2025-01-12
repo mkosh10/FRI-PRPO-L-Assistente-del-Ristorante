@@ -1,5 +1,8 @@
 package si.uni.lj.prpo.projekt04.beans;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
+import si.uni.lj.prpo.projekt04.Employee;
 import si.uni.lj.prpo.projekt04.Reservation;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -26,6 +29,14 @@ public class ReservationBean {
 
     public int getReservationListSize(){
         return getAllReservations().size();
+    }
+
+    public List<Reservation> getAllReservations(QueryParameters query) {
+        return JPAUtils.queryEntities(this.em, Reservation.class, query);
+    }
+
+    public long getReservationListSize(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(this.em, Reservation.class, query);
     }
 
     public Reservation getReservationWithId(Integer id){

@@ -5,7 +5,7 @@ kumuluzee:
     name: dev
   datasources:
     - jndi-name: jdbc/LAssistenteDelRistoranteDS
-      connection-url: jdbc:postgresql://localhost:8023/prpodb
+      connection-url: jdbc:postgresql://db-container:5432/prpodb
       username: username
       password: password123
       max-pool-size: 20
@@ -15,11 +15,14 @@ kumuluzee:
       - entities
       - services
 
-#  health:
-#    checks:
-#      data-source-health-check:
-#        type: liveness
-#        jndi-name: jdbc/NakupovalniSeznamiDS
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/LAssistenteDelRistoranteDS
+      http-health-check:
+        type: liveness
+        connection-url: https://api.calorieninjas.com/v1/nutrition
 #  rest-client:
 #    registrations:
 #      - class: priporocilni-sistem-api

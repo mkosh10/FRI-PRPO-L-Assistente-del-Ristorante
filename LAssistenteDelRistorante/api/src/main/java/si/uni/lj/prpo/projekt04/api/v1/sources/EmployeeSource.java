@@ -2,6 +2,7 @@ package si.uni.lj.prpo.projekt04.api.v1.sources;
 
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -11,6 +12,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import si.uni.lj.prpo.projekt04.DTOs.EmployeeDTO;
 import si.uni.lj.prpo.projekt04.DTOs.ReservationDTO;
+import si.uni.lj.prpo.projekt04.Employee;
+import si.uni.lj.prpo.projekt04.MenuItem;
 import si.uni.lj.prpo.projekt04.beans.EmployeeBean;
 import si.uni.lj.prpo.projekt04.management.EmployeeBeanManagement;
 
@@ -18,8 +21,11 @@ import javax.inject.Inject;
 import javax.json.bind.JsonbException;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.List;
 
 @Path("/employees")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -33,16 +39,31 @@ public class EmployeeSource {
     @Inject
     private EmployeeBeanManagement employeeBeanManagement;
 
+    @Context
+    private UriInfo uriInfo;
+
     @GET
     @Operation(summary = "Retrieve all employees", description = "Fetches a list of all employees currently stored in the system, including their basic details")
     @APIResponses({
             @APIResponse(description = "List of employees retrieved successfully.", responseCode = "200", content = @Content(schema = @Schema(implementation = EmployeeDTO.class)))
     })
     public Response getAllEmployees(){
+
+        final var query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Employee> responseList = null;
+        long listSize = 0;
+        if(query == null){
+            responseList = employeeBean.getAllEmployees();
+            listSize = employeeBean.getEmployeesListSize();
+        } else {
+            responseList = employeeBean.getAllEmployees(query);
+            listSize = employeeBean.getEmployeesListSize(query);
+        }
         return Response
-                .ok(employeeBean.getAllEmployees())
-                .header("X-Total-Count", employeeBean.getEmployeesListSize())
+                .ok(responseList)
+                .header("X-Total-Count", listSize)
                 .build();
+
     }
 
 
