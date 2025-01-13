@@ -82,7 +82,7 @@ public class EmployeeSource {
                     .status(Response.Status.OK)
                     .build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("Employee with id" + id + " was not found").build();
         }
     }
 
@@ -103,7 +103,7 @@ public class EmployeeSource {
 
             boolean success = employeeBeanManagement.addNewEmployee(employeeDTO);
             if(success){
-                return Response.status(Response.Status.CREATED).build();
+                return Response.status(Response.Status.CREATED).entity("Employee was created").build();
             } else {
                 return Response.status(Response.Status.BAD_REQUEST).build();
             }
@@ -131,9 +131,9 @@ public class EmployeeSource {
                                        EmployeeDTO employeeDTO){
         boolean success = employeeBeanManagement.updateEmployeeInfo(id, employeeDTO);
         if(success){
-            return Response.status(Response.Status.OK).build();
+            return Response.status(Response.Status.OK).entity("Employee details were successfully updated").build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("Employee with id" + id + " was not found").build();
         }
     }
 
@@ -149,7 +149,7 @@ public class EmployeeSource {
         if(success){
             return Response.status(Response.Status.OK).build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND) .entity("Employee with id" + id + " was not found").build();
         }
     }
 
