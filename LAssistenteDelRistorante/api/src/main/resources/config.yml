@@ -28,3 +28,6 @@ kumuluzee:
       http-health-check:
         type: liveness
         connection-url: https://api.calorieninjas.com/v1/nutrition
+      headers:
+        X-Api-Key: "7WOjamiscs0YLNXltficlg==1Axu7GutiFny1nJe"
+
